@@ -1,3 +1,3 @@
 # volaclient
-auto generated minimal API client code to benefit from features like auto_completion
+auto generated minimal API client code to benefit from features like auto completion
 
