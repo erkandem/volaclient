@@ -1,5 +1,5 @@
 """
-auto-generated 2019-12-16 14:23:27
+auto-generated 2019-12-20 21:47:30
 ... using [swagccg-py2py](https://erkandem.github.io/swagccg-py2py)'
 
 your module level doc-string goes here
@@ -7,7 +7,7 @@ your module level doc-string goes here
 
 # #######################################################################
 # DO NOT MODIFY THIS FILE!
-# Your changes will be lost if you rerun ``make_client.py``! 
+# Your changes will be lost if you rerun ``make_client.py``!
 # Edit the template!
 # #######################################################################
 
@@ -82,6 +82,7 @@ class VolaClient(object):
         method_names = [
             'get_pulse_r',
             'get_atm_ivol_r',
+            'get_ivol_smile_r',
             'get_surface_by_delta_r',
             'get_intraday_prices_r',
             'get_pvp_intraday_r',
@@ -107,7 +108,7 @@ class VolaClient(object):
             'delete_user_role_r'
         ]
         return method_names
-    
+
     def login_with_api(self, *, body, headers=None, **kwargs):
         """ login with the target API and save the JWT token within the class
             .. param data:: login data externally supplied
@@ -170,7 +171,7 @@ class VolaClient(object):
         res = json.loads(r.data.decode('utf-8'))
         self.API_TOKEN = res[self.AUTH_TOKEN_KEY_REFRESH]
         self.REFRESH_TIMESTAMP = dt.now()
-    
+
     def _add_auth_header(self, headers=None):
         """ adds the preconfigured authorization header """
         if headers is None:
@@ -251,7 +252,7 @@ class VolaClient(object):
             return 0
         else:
             return 0
-    
+
     def _encode(self, data, format=None):
         """
         Abstracted encoding point. Mount your custom function.
@@ -279,19 +280,19 @@ class VolaClient(object):
 
     def _decode(self, data):
         """
-        abstracted decoding point 
+        abstracted decoding point
         Mount your custom function. Focus here is on JSON.
 
         Args:
             data: python object (dict, list, ...)
 
         Returns:
-           data_decoded: first decode from binary to utf-8 and parse with 
+           data_decoded: first decode from binary to utf-8 and parse with
                          built-in :func:`json.loads`
         """
 
-        return json.loads(data.decode('utf-8')) 
-    
+        return json.loads(data.decode('utf-8'))
+
     def get_pulse_r(self, headers=None, body=None, fields_data=None, **kwargs):
         """ Get Pulse """
         r = self._do_call(
@@ -303,7 +304,7 @@ class VolaClient(object):
                 **kwargs
         )
         return r
-    
+
     def get_atm_ivol_r(self, headers=None, body=None, fields_data=None, **kwargs):
         """ Get ATM implied volatility data """
         r = self._do_call(
@@ -315,7 +316,19 @@ class VolaClient(object):
                 **kwargs
         )
         return r
-    
+
+    def get_ivol_smile_r(self, headers=None, body=None, fields_data=None, **kwargs):
+        """ smile """
+        r = self._do_call(
+                method='GET',
+                url=f'{self.API_BASE_URL}/ivol/smile',
+                headers=headers,
+                body=body,
+                fields=fields_data,
+                **kwargs
+        )
+        return r
+
     def get_surface_by_delta_r(self, headers=None, body=None, fields_data=None, **kwargs):
         """ returns a surface parameterized by delta and constant time """
         r = self._do_call(
@@ -327,7 +340,7 @@ class VolaClient(object):
                 **kwargs
         )
         return r
-    
+
     def get_intraday_prices_r(self, headers=None, body=None, fields_data=None, **kwargs):
         """ Get Intraday Prices """
         r = self._do_call(
@@ -339,7 +352,7 @@ class VolaClient(object):
                 **kwargs
         )
         return r
-    
+
     def get_pvp_intraday_r(self, headers=None, body=None, fields_data=None, **kwargs):
         """ price volume profile. histogram of intraday price data """
         r = self._do_call(
@@ -351,7 +364,7 @@ class VolaClient(object):
                 **kwargs
         )
         return r
-    
+
     def get_continuous_eod_r(self, headers=None, body=None, fields_data=None, **kwargs):
         """ Get Conti Eod """
         r = self._do_call(
@@ -363,7 +376,7 @@ class VolaClient(object):
                 **kwargs
         )
         return r
-    
+
     def get_continuous_eod_as_array_r(self, headers=None, body=None, fields_data=None, **kwargs):
         """ Get Continuous Eod As Array """
         r = self._do_call(
@@ -375,7 +388,7 @@ class VolaClient(object):
                 **kwargs
         )
         return r
-    
+
     def get_regular_futures_eod_r(self, headers=None, body=None, fields_data=None, **kwargs):
         """ Get Regular Futures Eod """
         r = self._do_call(
@@ -387,7 +400,7 @@ class VolaClient(object):
                 **kwargs
         )
         return r
-    
+
     def post_raw_option_data_r(self, headers=None, body=None, fields_data=None, **kwargs):
         """ Post Raw Option Data """
         r = self._do_call(
@@ -399,7 +412,7 @@ class VolaClient(object):
                 **kwargs
         )
         return r
-    
+
     def post_top_oi_and_volume_r(self, headers=None, body=None, fields_data=None, **kwargs):
         """ Post Top Oi And Volume """
         r = self._do_call(
@@ -411,7 +424,7 @@ class VolaClient(object):
                 **kwargs
         )
         return r
-    
+
     def post_delta_data_r(self, headers=None, body=None, fields_data=None, **kwargs):
         """ Post Delta Data """
         r = self._do_call(
@@ -423,7 +436,7 @@ class VolaClient(object):
                 **kwargs
         )
         return r
-    
+
     def get_api_info_usts_r(self, headers=None, body=None, fields_data=None, **kwargs):
         """ Get Api Info Usts """
         r = self._do_call(
@@ -435,7 +448,7 @@ class VolaClient(object):
                 **kwargs
         )
         return r
-    
+
     def get_api_info_exchanges_r(self, headers=None, body=None, fields_data=None, **kwargs):
         """ Get Api Info Exchanges """
         r = self._do_call(
@@ -447,7 +460,7 @@ class VolaClient(object):
                 **kwargs
         )
         return r
-    
+
     def get_api_info_symbols_r(self, headers=None, body=None, fields_data=None, **kwargs):
         """ Get Api Info Symbols """
         r = self._do_call(
@@ -459,7 +472,7 @@ class VolaClient(object):
                 **kwargs
         )
         return r
-    
+
     def get_api_info_ltd_r(self, headers=None, body=None, fields_data=None, **kwargs):
         """ Get Api Info Ltd """
         r = self._do_call(
@@ -471,7 +484,7 @@ class VolaClient(object):
                 **kwargs
         )
         return r
-    
+
     def get_api_info_option_month_and_underlying_month_r(self, headers=None, body=None, fields_data=None, **kwargs):
         """ Get Api Info Option Month And Underlying Month """
         r = self._do_call(
@@ -483,7 +496,7 @@ class VolaClient(object):
                 **kwargs
         )
         return r
-    
+
     def get_api_info_first_and_last_r(self, headers=None, body=None, fields_data=None, **kwargs):
         """ Get Api Info First And Last """
         r = self._do_call(
@@ -495,7 +508,7 @@ class VolaClient(object):
                 **kwargs
         )
         return r
-    
+
     def post_api_info_strikes_r(self, headers=None, body=None, fields_data=None, **kwargs):
         """ Post Api Info Strikes """
         r = self._do_call(
@@ -507,7 +520,7 @@ class VolaClient(object):
                 **kwargs
         )
         return r
-    
+
     def post_api_user_login_r(self, headers=None, body=None, fields_data=None, **kwargs):
         """ Post Api User Login """
         r = self._do_call(
@@ -519,7 +532,7 @@ class VolaClient(object):
                 **kwargs
         )
         return r
-    
+
     def post_add_new_api_user_r(self, headers=None, body=None, fields_data=None, **kwargs):
         """ Post Add New Api User """
         r = self._do_call(
@@ -531,7 +544,7 @@ class VolaClient(object):
                 **kwargs
         )
         return r
-    
+
     def delete_api_user_r(self, username, headers=None, body=None, fields_data=None, **kwargs):
         """ Delete Api User """
         r = self._do_call(
@@ -543,7 +556,7 @@ class VolaClient(object):
                 **kwargs
         )
         return r
-    
+
     def put_change_user_pw_r(self, username, headers=None, body=None, fields_data=None, **kwargs):
         """ Put Change User Pw """
         r = self._do_call(
@@ -555,7 +568,7 @@ class VolaClient(object):
                 **kwargs
         )
         return r
-    
+
     def get_user_roles_r(self, username, headers=None, body=None, fields_data=None, **kwargs):
         """ Get User Roles """
         r = self._do_call(
@@ -567,7 +580,7 @@ class VolaClient(object):
                 **kwargs
         )
         return r
-    
+
     def put_add_user_role_r(self, username, role, headers=None, body=None, fields_data=None, **kwargs):
         """ Put Add User Role """
         r = self._do_call(
@@ -579,7 +592,7 @@ class VolaClient(object):
                 **kwargs
         )
         return r
-    
+
     def delete_user_role_r(self, username, role, headers=None, body=None, fields_data=None, **kwargs):
         """ Delete User Role """
         r = self._do_call(
@@ -591,3 +604,4 @@ class VolaClient(object):
                 **kwargs
         )
         return r
+
