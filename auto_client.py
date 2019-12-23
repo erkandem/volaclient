@@ -1,5 +1,5 @@
 """
-auto-generated 2019-12-22 22:51:48
+auto-generated 2019-12-23 17:30:46
 ... using [swagccg-py2py](https://erkandem.github.io/swagccg-py2py)'
 
 your module level doc-string goes here
@@ -91,6 +91,7 @@ class VolaClient(object):
             'get_atm_ivol_r',
             'get_ivol_smile_r',
             'get_surface_by_delta_r',
+            'get_ivol_calendar_r',
             'get_intraday_prices_r',
             'get_pvp_intraday_r',
             'get_continuous_eod_r',
@@ -106,7 +107,7 @@ class VolaClient(object):
             'post_api_info_strikes_r',
             'post_top_oi_and_volume_r',
             'post_delta_data_r',
-            'get_fitted_risk_reversal_r'
+            'get_risk_reversal_r'
         ]
         return method_names
     
@@ -426,6 +427,18 @@ class VolaClient(object):
         )
         return r
     
+    def get_ivol_calendar_r(self, headers=None, body=None, fields_data=None, **kwargs):
+        """ Calculate the spread between different expiries """
+        r = self._do_call(
+                method='GET',
+                url=f'{self.API_BASE_URL}/ivol/calendar',
+                headers=headers,
+                body=body,
+                fields=fields_data,
+                **kwargs
+        )
+        return r
+    
     def get_intraday_prices_r(self, headers=None, body=None, fields_data=None, **kwargs):
         """ Get Intraday Prices """
         r = self._do_call(
@@ -606,7 +619,7 @@ class VolaClient(object):
         )
         return r
     
-    def get_fitted_risk_reversal_r(self, headers=None, body=None, fields_data=None, **kwargs):
+    def get_risk_reversal_r(self, headers=None, body=None, fields_data=None, **kwargs):
         """ Get the risk reversal of fitted implied volatility data """
         r = self._do_call(
                 method='GET',
