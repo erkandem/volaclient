@@ -1,5 +1,5 @@
 """
-auto-generated 2019-12-23 17:30:46
+auto-generated 2019-12-23 23:27:18
 ... using [swagccg-py2py](https://erkandem.github.io/swagccg-py2py)'
 
 your module level doc-string goes here
@@ -92,6 +92,7 @@ class VolaClient(object):
             'get_ivol_smile_r',
             'get_surface_by_delta_r',
             'get_ivol_calendar_r',
+            'get_inter_spread_r',
             'get_intraday_prices_r',
             'get_pvp_intraday_r',
             'get_continuous_eod_r',
@@ -107,7 +108,8 @@ class VolaClient(object):
             'post_api_info_strikes_r',
             'post_top_oi_and_volume_r',
             'post_delta_data_r',
-            'get_risk_reversal_r'
+            'get_risk_reversal_r',
+            'get_ivol_summary_single_r'
         ]
         return method_names
     
@@ -439,6 +441,18 @@ class VolaClient(object):
         )
         return r
     
+    def get_inter_spread_r(self, headers=None, body=None, fields_data=None, **kwargs):
+        """ get ivol spread between options with different underlying """
+        r = self._do_call(
+                method='GET',
+                url=f'{self.API_BASE_URL}/ivol/inter-spread',
+                headers=headers,
+                body=body,
+                fields=fields_data,
+                **kwargs
+        )
+        return r
+    
     def get_intraday_prices_r(self, headers=None, body=None, fields_data=None, **kwargs):
         """ Get Intraday Prices """
         r = self._do_call(
@@ -624,6 +638,18 @@ class VolaClient(object):
         r = self._do_call(
                 method='GET',
                 url=f'{self.API_BASE_URL}/ivol/risk-reversal',
+                headers=headers,
+                body=body,
+                fields=fields_data,
+                **kwargs
+        )
+        return r
+    
+    def get_ivol_summary_single_r(self, headers=None, body=None, fields_data=None, **kwargs):
+        """ get min, max, std, average and weekly data points """
+        r = self._do_call(
+                method='GET',
+                url=f'{self.API_BASE_URL}/ivol/summary/single',
                 headers=headers,
                 body=body,
                 fields=fields_data,
