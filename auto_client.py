@@ -1,5 +1,5 @@
 """
-auto-generated 2019-12-23 23:27:18
+auto-generated 2020-01-07 18:55:10
 ... using [swagccg-py2py](https://erkandem.github.io/swagccg-py2py)'
 
 your module level doc-string goes here
@@ -88,6 +88,7 @@ class VolaClient(object):
             'put_add_user_role_r',
             'delete_user_role_r',
             'post_api_user_login_r',
+            'get_ivol_r',
             'get_atm_ivol_r',
             'get_ivol_smile_r',
             'get_surface_by_delta_r',
@@ -96,6 +97,7 @@ class VolaClient(object):
             'get_intraday_prices_r',
             'get_pvp_intraday_r',
             'get_continuous_eod_r',
+            'get_continuous_eod_spread_r',
             'get_continuous_eod_as_array_r',
             'get_regular_futures_eod_r',
             'post_raw_option_data_r',
@@ -109,7 +111,11 @@ class VolaClient(object):
             'post_top_oi_and_volume_r',
             'post_delta_data_r',
             'get_risk_reversal_r',
-            'get_ivol_summary_single_r'
+            'get_ivol_summary_single_r',
+            'get_ivol_summary_cme_r',
+            'get_ivol_summary_ice_r',
+            'get_ivol_summary_usetf_r',
+            'get_ivol_summary_eurex_r'
         ]
         return method_names
     
@@ -298,10 +304,10 @@ class VolaClient(object):
         return json.loads(data.decode('utf-8')) 
     
     def get_pulse_r(self, headers=None, body=None, fields_data=None, **kwargs):
-        """ Get Pulse """
+        """ Get Heartbeat """
         r = self._do_call(
                 method='GET',
-                url=f'{self.API_BASE_URL}/pulse',
+                url=f'{self.API_BASE_URL}/heartbeat',
                 headers=headers,
                 body=body,
                 fields=fields_data,
@@ -386,6 +392,18 @@ class VolaClient(object):
         r = self._do_call(
                 method='POST',
                 url=f'{self.API_BASE_URL}/login',
+                headers=headers,
+                body=body,
+                fields=fields_data,
+                **kwargs
+        )
+        return r
+    
+    def get_ivol_r(self, headers=None, body=None, fields_data=None, **kwargs):
+        """ Get implied volatility data for a single delta and single tte """
+        r = self._do_call(
+                method='GET',
+                url=f'{self.API_BASE_URL}/ivol',
                 headers=headers,
                 body=body,
                 fields=fields_data,
@@ -482,6 +500,18 @@ class VolaClient(object):
         r = self._do_call(
                 method='GET',
                 url=f'{self.API_BASE_URL}/prices/eod/conti',
+                headers=headers,
+                body=body,
+                fields=fields_data,
+                **kwargs
+        )
+        return r
+    
+    def get_continuous_eod_spread_r(self, headers=None, body=None, fields_data=None, **kwargs):
+        """ Get Continuous Eod Spread """
+        r = self._do_call(
+                method='GET',
+                url=f'{self.API_BASE_URL}/prices/eod/conti/spread',
                 headers=headers,
                 body=body,
                 fields=fields_data,
@@ -650,6 +680,54 @@ class VolaClient(object):
         r = self._do_call(
                 method='GET',
                 url=f'{self.API_BASE_URL}/ivol/summary/single',
+                headers=headers,
+                body=body,
+                fields=fields_data,
+                **kwargs
+        )
+        return r
+    
+    def get_ivol_summary_cme_r(self, headers=None, body=None, fields_data=None, **kwargs):
+        """ get min, max, std, average and weekly data points for symbols on CME """
+        r = self._do_call(
+                method='GET',
+                url=f'{self.API_BASE_URL}/ivol/summary/cme',
+                headers=headers,
+                body=body,
+                fields=fields_data,
+                **kwargs
+        )
+        return r
+    
+    def get_ivol_summary_ice_r(self, headers=None, body=None, fields_data=None, **kwargs):
+        """ get min, max, std, average and weekly data points for sybmols on ICE """
+        r = self._do_call(
+                method='GET',
+                url=f'{self.API_BASE_URL}/ivol/summary/ice',
+                headers=headers,
+                body=body,
+                fields=fields_data,
+                **kwargs
+        )
+        return r
+    
+    def get_ivol_summary_usetf_r(self, headers=None, body=None, fields_data=None, **kwargs):
+        """ get min, max, std, average and weekly data points for US ETFs """
+        r = self._do_call(
+                method='GET',
+                url=f'{self.API_BASE_URL}/ivol/summary/usetf',
+                headers=headers,
+                body=body,
+                fields=fields_data,
+                **kwargs
+        )
+        return r
+    
+    def get_ivol_summary_eurex_r(self, headers=None, body=None, fields_data=None, **kwargs):
+        """ get min, max, std, average and weekly data points for symbols on EUREX """
+        r = self._do_call(
+                method='GET',
+                url=f'{self.API_BASE_URL}/ivol/summary/eurex',
                 headers=headers,
                 body=body,
                 fields=fields_data,
