@@ -1,5 +1,5 @@
 """
-auto-generated 2020-01-07 19:05:43
+auto-generated 2020-01-15 13:51:36
 ... using [swagccg-py2py](https://erkandem.github.io/swagccg-py2py)'
 
 your module level doc-string goes here
@@ -81,6 +81,7 @@ class VolaClient(object):
     def __dir__(self):
         method_names = [
             'get_heartbeat_r',
+            'get_api_users_r',
             'post_add_new_api_user_r',
             'delete_api_user_r',
             'put_change_user_pw_r',
@@ -308,6 +309,18 @@ class VolaClient(object):
         r = self._do_call(
                 method='GET',
                 url=f'{self.API_BASE_URL}/heartbeat',
+                headers=headers,
+                body=body,
+                fields=fields_data,
+                **kwargs
+        )
+        return r
+    
+    def get_api_users_r(self, headers=None, body=None, fields_data=None, **kwargs):
+        """ Get Api Users """
+        r = self._do_call(
+                method='GET',
+                url=f'{self.API_BASE_URL}/users',
                 headers=headers,
                 body=body,
                 fields=fields_data,
