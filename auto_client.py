@@ -1,5 +1,5 @@
 """
-auto-generated 2020-02-08 18:11:49
+auto-generated 2020-02-12 23:34:23
 ... using [swagccg-py2py](https://erkandem.github.io/swagccg-py2py)' version 0.3.3
 
 your module level doc-string goes here
@@ -131,7 +131,8 @@ class VolaClient(object):
             self.LOGIN_TIMESTAMP = dt.now()
             self.REFRESH_TIMESTAMP = None
         else:
-            print(f'login failed =/: \nstatus:{r.status} \n \nurl {r._request_url}')
+            print(f'login failed \nstatus:{r.status} \n \nurl: {self.API_LOGIN_URL}'
+                  '\nIs the username and password correct?')
 
     # -----------------------------------------------------------------------
     # ---------- Token Management
