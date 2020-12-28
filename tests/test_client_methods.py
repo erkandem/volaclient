@@ -58,7 +58,6 @@ class TestVolaClient:
         response = self.client.get_ivol_calendar_r(fields_data=dict(symbol='spy'))
         assert response.status == HTTPStatus.OK
 
-    @pytest.mark.skip(reason="Identified and fixed in server code")
     def test_get_ivol_inter_spread_r(self):
         response = self.client.get_ivol_inter_spread_r(fields_data=dict(symbol1='spy', symbol2='qqq'))
         assert response.status == HTTPStatus.OK
@@ -96,52 +95,128 @@ class TestVolaClient:
         pass
 
     def test_get_api_info_usts_r(self):
-        pass
+        response = self.client.get_api_info_usts_r()
+        assert response.status == HTTPStatus.OK
 
     def test_get_api_info_exchanges_r(self):
-        pass
+        response = self.client.get_api_info_exchanges_r(fields_data=dict(ust='eqt'))
+        assert response.status == HTTPStatus.OK
 
     def test_get_api_info_symbols_r(self):
-        pass
+        response = self.client.get_api_info_symbols_r(fields_data=dict(ust='eqt', exchange='usetf'))
+        assert response.status == HTTPStatus.OK
 
     def test_get_api_info_ltd_r(self):
-        pass
+        response = self.client.get_api_info_ltd_r(fields_data=dict(symbol='spy', ust='eqt', exchange='usetf'))
+        assert response.status == HTTPStatus.OK
 
     def test_get_api_info_option_month_and_underlying_month_r(self):
-        pass
+        response = self.client.get_api_info_option_month_and_underlying_month_r(fields_data=dict(symbol='cl', ust='fut', exchange='cme', ltd='20201120'))
+        assert response.status == HTTPStatus.OK
 
     def test_get_api_info_first_and_last_r(self):
-        pass
+        response = self.client.get_api_info_first_and_last_r(
+            fields_data=dict(
+                symbol='cl',
+                ust='fut',
+                exchange='cme',
+                ltd='20201120',
+                option_month='202011',
+                underlying_month='202101',
+            ))
+        assert response.status == HTTPStatus.OK
 
+    @pytest.mark.skip(reason="identified and fixed in next release")
     def test_get_api_info_strikes_r(self):
-        pass
+        response = self.client.get_api_info_strikes_r(
+            fields_data=dict(
+                symbol='cl',
+                ust='fut',
+                exchange='cme',
+                putcall='call',
+                ltd='20201120',
+                option_month='202011',
+                underlying_month='202101',
+            ))
+        assert response.status == HTTPStatus.OK
 
+    @pytest.mark.skip(reason="identified and fixed in next release")
     def test_post_api_info_strikes_r(self):
-        pass
+        response = self.client.post_api_info_strikes_r(
+            body=dict(
+                symbol='cl',
+                ust='fut',
+                exchange='cme',
+                putcall='call',
+                ltd='20201120',
+                option_month='202011',
+                underlying_month='202101',
+            ))
+        assert response.status == HTTPStatus.OK
 
     def test_get_all_options_single_underlying_single_day_r(self):
-        pass
+        response = self.client.get_all_options_single_underlying_single_day_r(
+            fields_data=dict(
+                symbol='spy',
+                date='2020-12-22',
+            )
+        )
+        assert response.status == HTTPStatus.OK
 
     def test_post_top_oi_and_volume_r(self):
-        pass
+        response = self.client.post_top_oi_and_volume_r(
+            body={
+                "ust": "eqt",
+                "exchange": "usetf",
+                "symbol": "spy",
+                "startdate": "2019-01-01",
+                "enddate": "2019-04-01",
+                "putcall": "call",
+                "ltd": "20200117",
+                "metric": "oi",
+                "dminus": 365,
+                "top_n": 5,
+                "order": "desc"
+            }
+        )
+        assert response.status == HTTPStatus.OK
 
     def test_post_delta_data_r(self):
-        pass
+        response = self.client.post_delta_data_r(
+            body={
+                "ust": "fut",
+                "exchange": "cme",
+                "symbol": "cl",
+                "option_month": "201912",
+                "underlying_month": "201912",
+                "startdate": "2019-01-01",
+                "enddate": "2019-04-01",
+                "ltd": "20191115"
+            }
+        )
+        import pdb;pdb.set_trace()
+        assert response.status == HTTPStatus.OK
 
     def test_get_risk_reversal_r(self):
-        pass
+        response = self.client.get_risk_reversal_r(fields_data=dict(symbol='spy'))
+        assert response.status == HTTPStatus.OK
 
     def test_get_ivol_summary_single_r(self):
-        pass
+        response = self.client.get_ivol_summary_single_r(fields_data=dict(symbol='spy'))
+        assert response.status == HTTPStatus.OK
 
     def test_get_ivol_summary_cme_r(self):
-        pass
+        response = self.client.get_ivol_summary_cme_r()
+        assert response.status == HTTPStatus.OK
 
     def test_get_ivol_summary_ice_r(self):
-        pass
+        response = self.client.get_ivol_summary_ice_r()
+        assert response.status == HTTPStatus.OK
 
     def test_get_ivol_summary_usetf_r(self):
-        pass
+        response = self.client.get_ivol_summary_usetf_r()
+        assert response.status == HTTPStatus.OK
 
     def test_get_ivol_summary_eurex_r(self):
-        pass
+        response = self.client.get_ivol_summary_eurex_r()
+        assert response.status == HTTPStatus.OK
